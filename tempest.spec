@@ -4,7 +4,7 @@
 #
 Name     : tempest
 Version  : 19.0.0
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Summary  : TEMPest is \a CLI tool to help manage temporary content - writtent in go
@@ -129,7 +129,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1559833509
+export SOURCE_DATE_EPOCH=1559835307
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -160,8 +160,8 @@ echo ----[ mark ]----
 
 %files bin
 %defattr(-,root,root,-)
-/usr/bin/check-uuid
-/usr/bin/skip-tracker
+%exclude /usr/bin/check-uuid
+%exclude /usr/bin/skip-tracker
 /usr/bin/subunit-describe-calls
 /usr/bin/tempest
 /usr/bin/tempest-account-generator
