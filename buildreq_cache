@@ -1,0 +1,7 @@
+19.0.0
+coverage-python
+flake8-import-order-python
+hacking
+oslotest
+oslotest-python
+prettytable

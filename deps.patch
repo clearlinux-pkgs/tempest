@@ -1,0 +1,19 @@
+--- tempest-19.0.0/test-requirements.txt~	2018-08-16 14:23:30.000000000 +0000
++++ tempest-19.0.0/test-requirements.txt	2019-05-17 01:03:27.019168242 +0000
+@@ -5,4 +5,4 @@
+ mock>=2.0.0 # BSD
+ coverage!=4.4,>=4.0 # Apache-2.0
+ oslotest>=3.2.0 # Apache-2.0
+-flake8-import-order==0.11 # LGPLv3
++flake8-import-order
+--- tempest-19.0.0/test-requirements.txt~	2018-08-16 14:23:30.000000000 +0000
++++ tempest-19.0.0/test-requirements.txt	2019-06-06 14:59:35.160411143 +0000
+@@ -1,7 +1,7 @@
+ # The order of packages is significant, because pip processes them in the order
+ # of appearance. Changing the order has an impact on the overall integration
+ # process, which may cause wedges in the gate later.
+-hacking!=0.13.0,<0.14,>=0.12.0 # Apache-2.0
++hacking
+ mock>=2.0.0 # BSD
+ coverage!=4.4,>=4.0 # Apache-2.0
+ oslotest>=3.2.0 # Apache-2.0
