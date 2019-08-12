@@ -4,14 +4,14 @@
 #
 Name     : tempest
 Version  : 19.0.0
-Release  : 4
+Release  : 5
 URL      : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
-Summary  : TEMPest is \a CLI tool to help manage temporary content - writtent in go
+Summary  : OpenStack Integration Testing
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: tempest-bin = %{version}-%{release}
-Requires: tempest-config = %{version}-%{release}
+Requires: tempest-data = %{version}-%{release}
 Requires: tempest-license = %{version}-%{release}
 Requires: tempest-python = %{version}-%{release}
 Requires: tempest-python3 = %{version}-%{release}
@@ -70,28 +70,25 @@ BuildRequires : virtualenv
 Patch1: deps.patch
 
 %description
-Setup Tempest run folder.
-To support isolation between multiple runs, separate run folders are required.
-Set `tempest` as owner of Tempest's current run folder.
-There is an implicit assumption here of a one to one relationship between
-devstack versions and Tempest runs.
+Team and repository tags
+        ========================
 
 %package bin
 Summary: bin components for the tempest package.
 Group: Binaries
-Requires: tempest-config = %{version}-%{release}
+Requires: tempest-data = %{version}-%{release}
 Requires: tempest-license = %{version}-%{release}
 
 %description bin
 bin components for the tempest package.
 
 
-%package config
-Summary: config components for the tempest package.
-Group: Default
+%package data
+Summary: data components for the tempest package.
+Group: Data
 
-%description config
-config components for the tempest package.
+%description data
+data components for the tempest package.
 
 
 %package license
@@ -128,8 +125,9 @@ python3 components for the tempest package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559835307
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1565633314
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -154,24 +152,30 @@ python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+## Remove excluded files
+rm -f %{buildroot}/usr/bin/skip-tracker
+rm -f %{buildroot}/usr/bin/check-uuid
+## install_append content
+mkdir -p %{buildroot}/usr/share/defaults/etc
+mv %{buildroot}/usr/etc/tempest %{buildroot}/usr/share/defaults/etc/
+rm -rf %{buildroot}/usr/etc
+## install_append end
 
 %files
 %defattr(-,root,root,-)
 
 %files bin
 %defattr(-,root,root,-)
-%exclude /usr/bin/check-uuid
-%exclude /usr/bin/skip-tracker
 /usr/bin/subunit-describe-calls
 /usr/bin/tempest
 /usr/bin/tempest-account-generator
 /usr/bin/verify-tempest-config
 
-%files config
+%files data
 %defattr(-,root,root,-)
-%config /usr/etc/tempest/accounts.yaml.sample
-%config /usr/etc/tempest/logging.conf.sample
-%config /usr/etc/tempest/whitelist.yaml
+/usr/share/defaults/etc/tempest/accounts.yaml.sample
+/usr/share/defaults/etc/tempest/logging.conf.sample
+/usr/share/defaults/etc/tempest/whitelist.yaml
 
 %files license
 %defattr(0644,root,root,0755)
