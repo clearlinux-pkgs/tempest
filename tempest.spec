@@ -4,7 +4,7 @@
 #
 Name     : tempest
 Version  : 19.0.0
-Release  : 5
+Release  : 6
 URL      : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Summary  : OpenStack Integration Testing
