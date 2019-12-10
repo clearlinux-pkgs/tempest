@@ -2,6 +2,7 @@
 coverage-python
 flake8-import-order-python
 hacking
+jsonschema-python
 oslotest
 oslotest-python
 prettytable

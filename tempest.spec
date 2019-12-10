@@ -4,7 +4,7 @@
 #
 Name     : tempest
 Version  : 19.0.0
-Release  : 6
+Release  : 7
 URL      : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Summary  : OpenStack Integration Testing
@@ -44,6 +44,7 @@ BuildRequires : fixtures
 BuildRequires : flake8-import-order-python
 BuildRequires : hacking
 BuildRequires : jsonschema
+BuildRequires : jsonschema-python
 BuildRequires : netaddr
 BuildRequires : oslo.concurrency
 BuildRequires : oslo.config
@@ -119,6 +120,7 @@ python3 components for the tempest package.
 
 %prep
 %setup -q -n tempest-19.0.0
+cd %{_builddir}/tempest-19.0.0
 %patch1 -p1
 
 %build
@@ -126,7 +128,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1565633314
+export SOURCE_DATE_EPOCH=1576016827
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -142,12 +144,12 @@ python3 setup.py build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test || :
+PYTHONPATH=%{buildroot}$(python -c "import sys; print(sys.path[-1])") python setup.py test || :
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tempest
-cp LICENSE %{buildroot}/usr/share/package-licenses/tempest/LICENSE
+cp %{_builddir}/tempest-19.0.0/LICENSE %{buildroot}/usr/share/package-licenses/tempest/294b43b2cec9919063be1a3b49e8722648424779
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -179,7 +181,7 @@ rm -rf %{buildroot}/usr/etc
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/tempest/LICENSE
+/usr/share/package-licenses/tempest/294b43b2cec9919063be1a3b49e8722648424779
 
 %files python
 %defattr(-,root,root,-)
