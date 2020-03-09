@@ -4,7 +4,7 @@
 #
 Name     : tempest
 Version  : 19.0.0
-Release  : 7
+Release  : 8
 URL      : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fb/c7/43a6b75c69bc620299e18391dc752c7bb9b0db77ca0b76235e2d506362ea/tempest-19.0.0.tar.gz
 Summary  : OpenStack Integration Testing
@@ -113,6 +113,28 @@ python components for the tempest package.
 Summary: python3 components for the tempest package.
 Group: Default
 Requires: python3-core
+Provides: pypi(tempest)
+Requires: pypi(cliff)
+Requires: pypi(debtcollector)
+Requires: pypi(fixtures)
+Requires: pypi(jsonschema)
+Requires: pypi(netaddr)
+Requires: pypi(oslo.concurrency)
+Requires: pypi(oslo.config)
+Requires: pypi(oslo.log)
+Requires: pypi(oslo.serialization)
+Requires: pypi(oslo.utils)
+Requires: pypi(paramiko)
+Requires: pypi(pbr)
+Requires: pypi(prettytable)
+Requires: pypi(python_subunit)
+Requires: pypi(pyyaml)
+Requires: pypi(six)
+Requires: pypi(stestr)
+Requires: pypi(stevedore)
+Requires: pypi(testtools)
+Requires: pypi(unittest2)
+Requires: pypi(urllib3)
 
 %description python3
 python3 components for the tempest package.
@@ -128,7 +150,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576016827
+export SOURCE_DATE_EPOCH=1583717127
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
